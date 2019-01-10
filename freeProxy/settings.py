@@ -46,16 +46,14 @@ DOWNLOAD_DELAY = 0.5
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 SPIDER_MIDDLEWARES = {
-    'frontera.contrib.scrapy.middlewares.schedulers.SchedulerSpiderMiddleware': 1000,
-    # 'freeProxy.middlewares.FreeproxySpiderMiddleware': 543,
-
+    'frontera.contrib.scrapy.middlewares.schedulers.SchedulerSpiderMiddleware': 999,
+    'frontera.contrib.scrapy.middlewares.seeds.file.FileSeedLoader': 1,
 }
-
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'freeProxy.middlewares.RandomUserAgentMiddleware': 400,
-    'frontera.contrib.scrapy.middlewares.schedulers.SchedulerDownloaderMiddleware': 1000,
+    'frontera.contrib.scrapy.middlewares.schedulers.SchedulerDownloaderMiddleware': 999,
     # 'freeProxy.middlewares.FreeproxyDownloaderMiddleware': 543,
 }
 
@@ -101,8 +99,6 @@ USER_AGENT_LIST = [
 
 SCHEDULER = 'frontera.contrib.scrapy.schedulers.frontier.FronteraScheduler'
 
-FRONTERA_SETTINGS = 'freeProxy.frontera.settings'
-
 
 HTTPCACHE_ENABLED = False
 REDIRECT_ENABLED = True
@@ -119,9 +115,7 @@ AUTOTHROTTLE_START_DELAY = 0.25
 RANDOMIZE_DOWNLOAD_DELAY = False
 
 # concurrency
-CONCURRENT_REQUESTS = 64
 CONCURRENT_REQUESTS_PER_DOMAIN = 10
-DOWNLOAD_DELAY = 0.0
 
 LOG_LEVEL = 'INFO'
 
@@ -129,3 +123,10 @@ REACTOR_THREADPOOL_MAXSIZE = 32
 DNS_TIMEOUT = 180
 FRONTERA_SETTINGS = 'config.spider'
 HTTPERROR_ALLOW_ALL = True
+
+# # concurrency
+# CONCURRENT_REQUESTS = 256  # Depends on many factors, and should be determined experimentally
+# CONCURRENT_REQUESTS_PER_DOMAIN = 10
+# DOWNLOAD_DELAY = 0.0
+
+

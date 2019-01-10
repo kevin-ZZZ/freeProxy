@@ -1,27 +1,21 @@
+# coding:utf-8
 # -*- coding: utf-8 -*-
+# @Time    : 1/9/19 3:25 PM
+# @Author  : Kevin
+# @Site    : 
+# @File    : worker.py.py
+# @Descri  : 
+# @Software: pycharm
+
+
 from __future__ import absolute_import
-from frontera.settings.default_settings import MIDDLEWARES
-from config import *
+from config.common import *
 
-MAX_NEXT_REQUESTS = 512
+BACKEND = 'frontera.contrib.backends.hbase.HBaseBackend'
 
-#--------------------------------------------------------
-# Url storage
-#--------------------------------------------------------
+MAX_NEXT_REQUESTS = 2048
+NEW_BATCH_DELAY = 3.0
 
-BACKEND = 'frontera.contrib.backends.sqlalchemy.Distributed'
-
-
-SQLALCHEMYBACKEND_ENGINE_ECHO = False
-from datetime import timedelta
-SQLALCHEMYBACKEND_REVISIT_INTERVAL = timedelta(days=3)
-
-
-MIDDLEWARES.extend([
-    'frontera.contrib.middlewares.domain.DomainMiddleware',
-    'frontera.contrib.middlewares.fingerprint.DomainFingerprintMiddleware'
-])
-
-LOGGING_CONFIG='logging.conf'
-
-
+HBASE_THRIFT_HOST = '10.1.220.7'  # HBase Thrift server host and port
+HBASE_THRIFT_PORT = 9090
+# HBASE_THRIFT_PORT = 2181
